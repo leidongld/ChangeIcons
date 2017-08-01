@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "com.example.leidong.changeicons"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        huawei {
+            minSdkVersion 20
+            applicationId 'com.example.leidong.huawei'
+            targetSdkVersion 26
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 2
+            versionName '2.0'
+            resValue "string", "app_name", "huawei"
+            buildConfigField "String", "CONTENT", '"这是huawei的应用"'
+            manifestPlaceholders = [ENVIRONMENT: "huawei",
+                                    app_icon   : "@drawable/huawei_icon"]
+        }
+        baidu {
+            minSdkVersion 18
+            applicationId 'com.example.leidong.baidu'
+            targetSdkVersion 25
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 3
+            versionName '3.0'
+            resValue "string", "app_name", "baidu"
+            buildConfigField "String", "CONTENT", '"这是baidu的应用"'
+            manifestPlaceholders = [ENVIRONMENT: "baidu",
+                                    app_icon   : "@drawable/baidu_icon"]
+        }
+        netease {
+            minSdkVersion 23
+            applicationId 'com.example.leidong.netease'
+            targetSdkVersion 22
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+            versionCode 4
+            versionName '4.0'
+            resValue "string", "app_name", "netease"
+            buildConfigField "String", "CONTENT", '"这是netease的应用"'
+            manifestPlaceholders = [ENVIRONMENT: "netease",
+                                    app_icon   : "@drawable/netease_icon"]
+        }
+    }
+
+    //移除lint检测的error
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+}
